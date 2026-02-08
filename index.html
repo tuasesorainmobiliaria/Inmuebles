@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inmuebles Maribel | Exclusividad Inmobiliaria</title>
+    <title>Maribel Barrios | Tu Asesora Inmobiliaria</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,6 +12,20 @@
         .glass-header { 
             background: rgba(30, 58, 138, 0.95);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-carousel-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3; /* Menor opacidad para que no opaque el texto */
+            transition: background-image 1.5s ease-in-out, opacity 1s ease;
+            z-index: 0;
         }
         .card-premium {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,11 +38,6 @@
         .btn-wa {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
         }
-        .price-tag {
-            background: linear-gradient(to right, #1e40af, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
         .filter-btn {
             transition: all 0.3s ease;
         }
@@ -38,24 +47,77 @@
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         }
+        /* Animación de Bienvenida */
+        #welcome-splash {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+            z-index: 9999;
+        }
+        #welcome-splash.hidden {
+            opacity: 0;
+            pointer-events: none; /* Permite hacer clic a través una vez oculto */
+        }
+        .fade-out-up {
+            animation: fadeOutUp 1s forwards;
+            animation-delay: 2s; /* Empieza a desaparecer después de 2 segundos */
+        }
+        @keyframes fadeOutUp {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-50px); }
+        }
+
+        .sold-tag {
+            background-color: #ef4444; /* Rojo */
+            color: white;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 6px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            transform: rotate(5deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body class="bg-[#f8fafc] min-h-screen">
 
-    <header class="glass-header text-white py-16 px-4 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10">
-            <div class="absolute inset-0" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
-        </div>
-        <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <span class="uppercase tracking-[0.3em] text-sm font-semibold text-blue-300">Bienes Raíces</span>
-            <h1 class="text-5xl md:text-6xl font-extrabold mt-2 tracking-tight">INMUEBLES <span class="text-blue-400">MARIBEL</span></h1>
-            <div class="w-20 h-1 bg-blue-400 mx-auto mt-6 rounded-full"></div>
-            <p class="mt-6 text-lg text-blue-100 font-light max-w-xl mx-auto italic">"Transformo tu sueño en una realidad con la exclusividad que mereces"</p>
+    <div id="welcome-splash">
+        <p class="text-white text-center text-4xl font-extrabold tracking-tight fade-out-up">¡Bienvenido/a!</p>
+        <p class="text-blue-100 text-center text-xl font-light italic mt-2 fade-out-up" style="animation-delay: 2.2s;">Encuentra tu hogar ideal...</p>
+    </div>
+
+    <header class="glass-header text-white py-16 px-4">
+        <div class="header-carousel-bg" id="header-carousel-bg"></div>
+        <div class="relative z-10 max-w-5xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mt-2 tracking-tight drop-shadow-lg text-white">MARIBEL BARRIOS</h1>
+            <p class="mt-2 text-xl md:text-2xl text-blue-200 font-semibold italic">Tu Asesora Inmobiliaria</p>
+            <div class="w-24 h-1.5 bg-blue-400 mx-auto mt-6 rounded-full opacity-80"></div>
+            <p class="mt-8 text-2xl md:text-3xl font-light max-w-2xl mx-auto italic leading-relaxed text-blue-100 drop-shadow-md">
+                "Transformo tu sueño en una realidad"
+            </p>
+            <p class="mt-10 text-base md:text-lg text-blue-50 font-light max-w-3xl mx-auto leading-relaxed opacity-90">
+                Descubre la mejor manera de comprar, vender o alquilar inmuebles en nuestra plataforma. Te ofrecemos un espacio completo para que publiques o encuentres todo lo que necesitas: apartamentos, casas, terrenos y locales comerciales. Nuestro compromiso es brindarte calidad, seguridad y los mejores precios del mercado. ¡Publica con nosotros y experimenta la mejor experiencia!
+            </p>
         </div>
     </header>
 
     <nav class="max-w-5xl mx-auto px-6 -mt-10 relative z-20">
-        <div class="bg-white/80 backdrop-blur-md p-2 rounded-3xl shadow-2xl flex flex-wrap gap-2 justify-center border border-white/20">
+        <div class="bg-white/95 backdrop-blur-sm p-3 rounded-3xl shadow-2xl flex flex-wrap gap-2 justify-center border border-white/40">
             <button onclick="filtrar('todos', this)" class="filter-btn filter-active px-7 py-3 rounded-2xl font-bold text-sm">Todos</button>
             <button onclick="filtrar('Casa', this)" class="filter-btn bg-gray-50 text-gray-600 px-7 py-3 rounded-2xl font-bold text-sm hover:bg-gray-100">Casas</button>
             <button onclick="filtrar('Apartamento', this)" class="filter-btn bg-gray-50 text-gray-600 px-7 py-3 rounded-2xl font-bold text-sm hover:bg-gray-100">Apartamentos</button>
@@ -68,22 +130,22 @@
         <div id="contenedor-casas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <div class="col-span-full text-center py-20">
                 <div class="animate-spin inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mb-4"></div>
-                <p class="text-gray-400 font-medium">Preparando catálogo exclusivo...</p>
+                <p class="text-gray-400 font-medium">Cargando propiedades de Maribel Barrios...</p>
             </div>
         </div>
     </main>
 
     <footer class="bg-slate-900 text-white py-16 mt-20">
         <div class="max-w-7xl mx-auto text-center px-4">
-            <h3 class="text-2xl font-bold tracking-widest uppercase">Inmuebles Maribel</h3>
+            <h3 class="text-2xl font-bold tracking-widest uppercase text-blue-200">Maribel Barrios</h3>
             <p class="text-slate-400 mt-4 font-light">Asesoría profesional en cada paso de tu inversión.</p>
             <div class="flex justify-center gap-8 mt-10">
-                <a href="#" class="text-slate-400 hover:text-white transition-all transform hover:scale-125"><i class="fab fa-whatsapp text-2xl"></i></a>
-                <a href="#" class="text-slate-400 hover:text-white transition-all transform hover:scale-125"><i class="fab fa-instagram text-2xl"></i></a>
-                <a href="#" class="text-slate-400 hover:text-white transition-all transform hover:scale-125"><i class="fab fa-facebook-f text-2xl"></i></a>
+                <a href="https://wa.me/584127085935" class="text-slate-400 hover:text-green-400 transition-all transform hover:scale-125"><i class="fab fa-whatsapp text-2xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-pink-400 transition-all transform hover:scale-125"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-blue-400 transition-all transform hover:scale-125"><i class="fab fa-facebook-f text-2xl"></i></a>
             </div>
             <div class="mt-12 pt-8 border-t border-slate-800 text-slate-500 text-xs">
-                &copy; 2026 INMUEBLES MARIBEL | DISEÑO DE ALTA GAMA
+                &copy; 2026 Maribel Barrios | Tu Asesora Inmobiliaria
             </div>
         </div>
     </footer>
@@ -92,6 +154,33 @@
         const EXCEL_ID = '16dqDFvIQO9fPykDBD6PIWhf6_Sure1Q2_7yJtslTHZM';
         const WHATSAPP = '584127085935'; 
         let todasLasCasas = [];
+
+        // Imágenes para el carrusel de fondo del header
+        const headerImages = [
+            'https://images.unsplash.com/photo-1560518883-ff51f8167b13?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Casa moderna
+            'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Apartamento luminoso
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Casa con piscina
+            'https://images.unsplash.com/photo-1580587771525-78b9dba38135?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Interior de lujo
+        ];
+        let currentImageIndex = 0;
+
+        function updateHeaderBackground() {
+            const headerBg = document.getElementById('header-carousel-bg');
+            headerBg.style.backgroundImage = `url('${headerImages[currentImageIndex]}')`;
+            currentImageIndex = (currentImageIndex + 1) % headerImages.length;
+        }
+
+        // Ejecutar el carrusel de fondo cada 5 segundos
+        setInterval(updateHeaderBackground, 5000);
+        updateHeaderBackground(); // Carga la primera imagen al inicio
+
+        // Ocultar el splash de bienvenida
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('welcome-splash');
+                splash.classList.add('hidden');
+            }, 3000); // 3 segundos para que desaparezca (2s animación + 1s extra)
+        });
 
         async function cargarCasas() {
             try {
@@ -119,6 +208,7 @@
                 const hab = fila.c[6]?.v || '0';
                 const ban = fila.c[7]?.v || '0';
                 const pto = fila.c[8]?.v || '0';
+                const vendido = String(fila.c[9]?.v || '').toLowerCase(); // Nuevo campo 'vendido'
 
                 const idCasa = `casa-${idx}`;
 
@@ -126,9 +216,11 @@
                     <div class="card-premium bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm">
                         <div class="relative h-72 overflow-hidden">
                             <img id="img-${idCasa}" src="${fotos[0] || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800'}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <div class="absolute top-5 left-5 bg-white/90 backdrop-blur-sm text-blue-900 text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm border border-blue-100">
-                                ${estado}
-                            </div>
+                            ${vendido === 'si' ? `<span class="sold-tag">VENDIDO</span>` : `
+                                <div class="absolute top-5 left-5 bg-white/90 backdrop-blur-sm text-blue-900 text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm border border-blue-100">
+                                    ${estado}
+                                </div>
+                            `}
                         </div>
 
                         <div class="p-8 flex-grow">
@@ -157,16 +249,23 @@
 
                         <div class="px-8 pb-8 flex gap-3">
                             <a href="https://wa.me/${WHATSAPP}?text=Hola Maribel, deseo información sobre: ${encodeURIComponent(titulo)}" 
-                               class="flex-[4] btn-wa text-white py-4 rounded-2xl font-bold shadow-lg shadow-green-200 flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
-                                <i class="fab fa-whatsapp text-xl"></i> CONTACTAR
+                               class="flex-[4] btn-wa text-white py-4 rounded-2xl font-bold shadow-lg shadow-green-200 flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95 ${vendido === 'si' ? 'opacity-50 pointer-events-none' : ''}">
+                                <i class="fab fa-whatsapp text-xl"></i> ${vendido === 'si' ? 'VENDIDO' : 'CONTACTAR'}
                             </a>
-                            <button onclick="compartir('${titulo}')" class="flex-[1] bg-slate-50 text-slate-400 hover:text-blue-500 hover:bg-blue-50 py-4 rounded-2xl flex items-center justify-center transition-all">
+                            <button onclick="compartir('${titulo}')" class="flex-[1] bg-slate-50 text-slate-400 hover:text-blue-500 hover:bg-blue-50 py-4 rounded-2xl flex items-center justify-center transition-all ${vendido === 'si' ? 'opacity-50 pointer-events-none' : ''}">
                                 <i class="fas fa-share-alt text-lg"></i>
                             </button>
                         </div>
                     </div>
                 `;
             });
+        }
+
+        const indices = {};
+        function cambiarFoto(id, direccion, lista) {
+            if (!indices[id]) indices[id] = 0;
+            indices[id] = (indices[id] + direccion + lista.length) % lista.length;
+            document.getElementById(`img-${id}`).src = lista[indices[id]];
         }
 
         function filtrar(criterio, btn) {
@@ -178,6 +277,7 @@
             } else {
                 const filtradas = todasLasCasas.filter((f, idx) => {
                     if(idx === 0) return true;
+                    // Comparamos sin importar mayúsculas
                     const t = String(f.c[4]?.v || '').toLowerCase();
                     const e = String(f.c[5]?.v || '').toLowerCase();
                     return (t === criterio.toLowerCase() || e === criterio.toLowerCase());
@@ -188,7 +288,7 @@
 
         function compartir(propiedad) {
             const url = window.location.href;
-            const msg = `Propiedad de interés en Inmuebles Maribel: ${propiedad} - Info aquí: ${url}`;
+            const msg = `Descubre esta propiedad en Maribel Barrios - Tu Asesora Inmobiliaria: "${propiedad}" - ${url}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
